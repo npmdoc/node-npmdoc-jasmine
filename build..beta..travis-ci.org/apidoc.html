@@ -1,0 +1,268 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="http://jasmine.github.io/"
+
+    >jasmine (v2.5.3)</a>
+</h1>
+<h4>Command line jasmine</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.jasmine">module jasmine</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.jasmine.ConsoleReporter">
+            function <span class="apidocSignatureSpan">jasmine.</span>ConsoleReporter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.jasmine" id="apidoc.module.jasmine">module jasmine</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.jasmine.ConsoleReporter" id="apidoc.element.jasmine.ConsoleReporter">
+        function <span class="apidocSignatureSpan">jasmine.</span>ConsoleReporter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ConsoleReporter() {
+  var print = function() {},
+    showColors = false,
+    timer = noopTimer,
+    jasmineCorePath = null,
+    printDeprecation = function() {},
+    specCount,
+    executableSpecCount,
+    failureCount,
+    failedSpecs = [],
+    pendingSpecs = [],
+    ansi = {
+      green: &#x27;\x1B[32m&#x27;,
+      red: &#x27;\x1B[31m&#x27;,
+      yellow: &#x27;\x1B[33m&#x27;,
+      none: &#x27;\x1B[0m&#x27;
+    },
+    failedSuites = [],
+    stackFilter = defaultStackFilter,
+    onComplete = function() {};
+
+  this.setOptions = function(options) {
+    if (options.print) {
+      print = options.print;
+    }
+    showColors = options.showColors || false;
+    if (options.timer) {
+      timer = options.timer;
+    }
+    if (options.jasmineCorePath) {
+      jasmineCorePath = options.jasmineCorePath;
+    }
+    if (options.printDeprecation) {
+      printDeprecation = options.printDeprecation;
+    }
+    if (options.stackFilter) {
+      stackFilter = options.stackFilter;
+    }
+
+    if(options.onComplete) {
+      printDeprecation(&#x27;Passing in an onComplete function to the ConsoleReporter is deprecated.&#x27;);
+      onComplete = options.onComplete;
+    }
+  };
+
+  this.jasmineStarted = function() {
+    specCount = 0;
+    executableSpecCount = 0;
+    failureCount = 0;
+    print(&#x27;Started&#x27;);
+    printNewline();
+    timer.start();
+  };
+
+  this.jasmineDone = function(result) {
+    printNewline();
+    printNewline();
+    if(failedSpecs.length &#x3e; 0) {
+      print(&#x27;Failures:&#x27;);
+    }
+    for (var i = 0; i &#x3c; failedSpecs.length; i++) {
+      specFailureDetails(failedSpecs[i], i + 1);
+    }
+
+    if (pendingSpecs.length &#x3e; 0) {
+      print(&#x22;Pending:&#x22;);
+    }
+    for(i = 0; i &#x3c; pendingSpecs.length; i++) {
+      pendingSpecDetails(pendingSpecs[i], i + 1);
+    }
+
+    if(specCount &#x3e; 0) {
+      printNewline();
+
+      if(executableSpecCount !== specCount) {
+        print(&#x27;Ran &#x27; + executableSpecCount + &#x27; of &#x27; + specCount + plural(&#x27; spec&#x27;, specCount));
+        printNewline();
+      }
+      var specCounts = executableSpecCount + &#x27; &#x27; + plural(&#x27;spec&#x27;, executableSpecCount) + &#x27;, &#x27; +
+        failureCount + &#x27; &#x27; + plural(&#x27;failure&#x27;, failureCount);
+
+      if (pendingSpecs.length) {
+        specCounts += &#x27;, &#x27; + pendingSpecs.length + &#x27; pending &#x27; + plural(&#x27;spec&#x27;, pendingSpecs.length);
+      }
+
+      print(specCounts);
+    } else {
+      print(&#x27;No specs found&#x27;);
+    }
+
+    printNewline();
+    var seconds = timer.elapsed() / 1000;
+    print(&#x27;Finished in &#x27; + seconds + &#x27; &#x27; + plural(&#x27;second&#x27;, seconds));
+    printNewline();
+
+    for(i = 0; i &#x3c; failedSuites.length; i++) {
+      suiteFailureDetails(failedSuites[i]);
+    }
+
+    if (result &#x26;&#x26; result.failedExpectations) {
+      suiteFailureDetails(result);
+    }
+
+    if (result &#x26;&#x26; result.order &#x26;&#x26; result.order.random) {
+      print(&#x27;Randomized with seed &#x27; + result.order.seed);
+      printNewline();
+    }
+
+    onComplete(failureCount === 0);
+  };
+
+  this.specDone = function(result) {
+    specCount++;
+
+    if (result.status == &#x27;pending&#x27;) {
+      pendingSpecs.push(result);
+      executableSpecCount++;
+      print(colored(&#x27;yellow&#x27;, &#x27;*&#x27;));
+      return;
+    }
+
+    if (result.status == &#x27;passed&#x27;) {
+      executableSpecCount++;
+      print(colored(&#x27;green&#x27;, &#x27;.&#x27;));
+      return;
+    }
+
+    if (result.status == &#x27;failed&#x27;) {
+      failureCount++;
+      failedSpecs.push(result);
+      executableSpecCount++;
+      print(colored(&#x27;red&#x27;, &#x27;F&#x27;));
+    }
+  };
+
+  this.suiteDone = function(result) {
+    if (result.failedExpectations &#x26;&#x26; result.failedExpectations.length &#x3e; 0) {
+      failureCount++;
+      failedSuites.push(result);
+    }
+  };
+
+  return this;
+
+  function printNewline() {
+    print(&#x27;\n&#x27;);
+  }
+
+  function colored(color, str) {
+    return showColors ? (ansi[color] + str + ansi.none) : str;
+  }
+
+  function plural(str, count) {
+    return count == 1 ? str : str + &#x27;s&#x27;;
+  }
+
+  function repeat(thing, times) {
+    var arr = [];
+    for (var i = 0; i &#x3c; times; i++) {
+      arr.push(thing);
+    }
+    return arr;
+  }
+
+  function indent(str, spaces) {
+    var lines = (str || &#x27;&#x27;).split(&#x27;\n&#x27;);
+    var newArr = [];
+    for (var i = 0; i &#x3c; lines.length; i++) {
+      newArr.push(repeat(&#x27; &#x27;, spac ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
