@@ -1,11 +1,13 @@
 # api documentation for  [jasmine (v2.5.3)](http://jasmine.github.io/)  [![npm package](https://img.shields.io/npm/v/npmdoc-jasmine.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-jasmine) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-jasmine.svg)](https://travis-ci.org/npmdoc/node-npmdoc-jasmine)
 #### Command line jasmine
 
-[![NPM](https://nodei.co/npm/jasmine.png?downloads=true)](https://www.npmjs.com/package/jasmine)
+[![NPM](https://nodei.co/npm/jasmine.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jasmine)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-jasmine/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-jasmine_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jasmine/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-jasmine/build/screenCapture.buildCi.browser.apidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jasmine/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-jasmine/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-jasmine/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-jasmine/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -49,21 +51,17 @@
     "main": "./lib/jasmine.js",
     "maintainers": [
         {
-            "name": "slackersoft",
-            "email": "gregg@slackersoft.net"
+            "name": "slackersoft"
         },
         {
-            "name": "dwfrank",
-            "email": "dwfrank@pivotallabs.com"
+            "name": "dwfrank"
         },
         {
-            "name": "amavisca",
-            "email": "chris.amavisca@gmail.com"
+            "name": "amavisca"
         }
     ],
     "name": "jasmine",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jasmine/jasmine-npm.git"
@@ -80,11 +78,51 @@
 # <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
 
 #### [module jasmine](#apidoc.module.jasmine)
+1.  [function <span class="apidocSignatureSpan"></span>jasmine (options)](#apidoc.element.jasmine.jasmine)
 1.  [function <span class="apidocSignatureSpan">jasmine.</span>ConsoleReporter ()](#apidoc.element.jasmine.ConsoleReporter)
+1.  [function <span class="apidocSignatureSpan">jasmine.</span>toString ()](#apidoc.element.jasmine.toString)
 
 
 
 # <a name="apidoc.module.jasmine"></a>[module jasmine](#apidoc.module.jasmine)
+
+#### <a name="apidoc.element.jasmine.jasmine"></a>[function <span class="apidocSignatureSpan"></span>jasmine (options)](#apidoc.element.jasmine.jasmine)
+- description and source-code
+```javascript
+function Jasmine(options) {
+  options = options || {};
+  var jasmineCore = options.jasmineCore || require('jasmine-core');
+  this.jasmineCorePath = path.join(jasmineCore.files.path, 'jasmine.js');
+  this.jasmine = jasmineCore.boot(jasmineCore);
+  this.projectBaseDir = options.projectBaseDir || path.resolve();
+  this.printDeprecation = options.printDeprecation || require('./printDeprecation');
+  this.specDir = '';
+  this.specFiles = [];
+  this.helperFiles = [];
+  this.env = this.jasmine.getEnv();
+  this.reportersCount = 0;
+  this.completionReporter = new CompletionReporter();
+  this.onCompleteCallbackAdded = false;
+  this.exit = exit;
+  this.showingColors = true;
+  this.reporter = new module.exports.ConsoleReporter();
+  this.env.addReporter(this.reporter);
+  this.defaultReporterConfigured = false;
+
+  var jasmineRunner = this;
+  this.completionReporter.onComplete(function(passed) {
+    jasmineRunner.exitCodeCompletion(passed);
+  });
+
+  this.coreVersion = function() {
+    return jasmineCore.version();
+  };
+}
+```
+- example usage
+```shell
+n/a
+```
 
 #### <a name="apidoc.element.jasmine.ConsoleReporter"></a>[function <span class="apidocSignatureSpan">jasmine.</span>ConsoleReporter ()](#apidoc.element.jasmine.ConsoleReporter)
 - description and source-code
@@ -258,6 +296,18 @@ function ConsoleReporter() {
     var newArr = [];
     for (var i = 0; i < lines.length; i++) {
       newArr.push(repeat(' ', spac ...
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.jasmine.toString"></a>[function <span class="apidocSignatureSpan">jasmine.</span>toString ()](#apidoc.element.jasmine.toString)
+- description and source-code
+```javascript
+toString = function () {
+    return toString;
+}
 ```
 - example usage
 ```shell
