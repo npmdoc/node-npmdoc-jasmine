@@ -56,8 +56,26 @@
 
         <li>
 
+            <a class="apidocElementLiA" href="#apidoc.element.jasmine.jasmine">
+            function <span class="apidocSignatureSpan"></span>jasmine
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
             <a class="apidocElementLiA" href="#apidoc.element.jasmine.ConsoleReporter">
             function <span class="apidocSignatureSpan">jasmine.</span>ConsoleReporter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.jasmine.toString">
+            function <span class="apidocSignatureSpan">jasmine.</span>toString
             <span class="apidocSignatureSpan">()</span>
             </a>
 
@@ -69,6 +87,47 @@
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.jasmine" id="apidoc.module.jasmine">module jasmine</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.jasmine.jasmine" id="apidoc.element.jasmine.jasmine">
+        function <span class="apidocSignatureSpan"></span>jasmine
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Jasmine(options) {
+  options = options || {};
+  var jasmineCore = options.jasmineCore || require('jasmine-core');
+  this.jasmineCorePath = path.join(jasmineCore.files.path, 'jasmine.js');
+  this.jasmine = jasmineCore.boot(jasmineCore);
+  this.projectBaseDir = options.projectBaseDir || path.resolve();
+  this.printDeprecation = options.printDeprecation || require('./printDeprecation');
+  this.specDir = '';
+  this.specFiles = [];
+  this.helperFiles = [];
+  this.env = this.jasmine.getEnv();
+  this.reportersCount = 0;
+  this.completionReporter = new CompletionReporter();
+  this.onCompleteCallbackAdded = false;
+  this.exit = exit;
+  this.showingColors = true;
+  this.reporter = new module.exports.ConsoleReporter();
+  this.env.addReporter(this.reporter);
+  this.defaultReporterConfigured = false;
+
+  var jasmineRunner = this;
+  this.completionReporter.onComplete(function(passed) {
+    jasmineRunner.exitCodeCompletion(passed);
+  });
+
+  this.coreVersion = function() {
+    return jasmineCore.version();
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 
     <h2>
@@ -247,6 +306,21 @@
     var newArr = [];
     for (var i = 0; i &lt; lines.length; i++) {
       newArr.push(repeat(' ', spac ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.jasmine.toString" id="apidoc.element.jasmine.toString">
+        function <span class="apidocSignatureSpan">jasmine.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return toString;
+}</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 

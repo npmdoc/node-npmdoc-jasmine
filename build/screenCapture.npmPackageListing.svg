@@ -1,0 +1,20 @@
+<svg height="270" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="270" fill="#555" width="720"></rect>
+<text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
+<tspan x="10" y="26">  0.  2017-04-15 21:41:14 +0000    26636 bytes  .</tspan>
+<tspan x="10" y="42">  1.  2017-04-15 21:41:14 +0000     1167 bytes  Gruntfile.js</tspan>
+<tspan x="10" y="58">  2.  2017-04-15 21:41:14 +0000     1061 bytes  MIT.LICENSE</tspan>
+<tspan x="10" y="74">  3.  2017-04-15 21:41:14 +0000     1597 bytes  README.md</tspan>
+<tspan x="10" y="90">  4.  2017-04-15 21:41:14 +0000      435 bytes  bin/jasmine.js</tspan>
+<tspan x="10" y="106">  5.  2017-04-15 21:41:14 +0000     6672 bytes  lib/command.js</tspan>
+<tspan x="10" y="122">  6.  2017-04-15 21:41:14 +0000      171 bytes  lib/examples/jasmine.json</tspan>
+<tspan x="10" y="138">  7.  2017-04-15 21:41:14 +0000      424 bytes  lib/exit.js</tspan>
+<tspan x="10" y="154">  8.  2017-04-15 21:41:14 +0000      274 bytes  lib/filters/console_spec_filter.js</tspan>
+<tspan x="10" y="170">  9.  2017-04-15 21:41:14 +0000     5367 bytes  lib/jasmine.js</tspan>
+<tspan x="10" y="186"> 10.  2017-04-15 21:41:14 +0000       90 bytes  lib/printDeprecation.js</tspan>
+<tspan x="10" y="202"> 11.  2017-04-15 21:41:14 +0000      633 bytes  lib/reporters/completion_reporter.js</tspan>
+<tspan x="10" y="218"> 12.  2017-04-15 21:41:14 +0000     5885 bytes  lib/reporters/console_reporter.js</tspan>
+<tspan x="10" y="234"> 13.  2017-04-15 21:41:14 +0000     2504 bytes  package.json</tspan>
+<tspan x="10" y="250"> 14.  2017-04-15 21:41:14 +0000      356 bytes  tasks/jasmine.js</tspan>
+</text>
+</svg>
